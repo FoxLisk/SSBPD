@@ -1,0 +1,169 @@
+﻿@model SSBPD.ViewModels.TournamentDetailViewModel
+@using SSBPD.Models
+@{
+    ViewBag.Title = Model.tournament.Name;
+}
+<h2 id="tournamentName">@Model.tournament.Name</h2>
+<h3>@Model.entrants entrants</h3>
+<input id="tournamentId" type="hidden" value="@Model.tournament.TournamentID" />
+<div id="date">
+    Played on @Model.tournament.Date.ToString("MM/dd/yyyy")
+</div>
+@if (Convert.ToBoolean(Session["userModerator"]))
+{
+    <div>
+        <div>
+            @{
+    string downloadLink = "/download/" + Model.tournament.TournamentGuid; 
+                <a href="@downloadLink">Download</a>
+            }
+        </div>
+        <form id="updateTournament">
+        <label for="name">
+            New tournament name:</label>
+        <input type="text" name="name" />
+        @Html.Partial("Date", "tournament")
+        <a href="#" id="updateTournamentLink">Update</a>
+        </form>
+    </div>
+}
+<div class="brackets">
+    @foreach (IGrouping<string, Set> bracket in Model.Brackets)
+    {
+        <p class="bracket-name">@bracket.Key</p>
+        <table class="bracket">
+            <tr>
+                <th>
+                    Round
+                </th>
+                <th>
+                    Winner
+                </th>
+                <th>
+                    Loser
+                </th>
+            </tr>
+            @foreach (SSBPD.Models.Set set in bracket)
+            {
+                string winners = Convert.ToBoolean(set.IsWinners) ? "Winners" : "Losers";
+                string winnerTag = Model.IdToPlayer[set.WinnerID].Tag;
+                string loserTag = Model.IdToPlayer[set.LoserID].Tag;
+                string winnerURL = Model.IdToPlayer[set.WinnerID].URL;
+                string loserURL = Model.IdToPlayer[set.LoserID].URL;
+                <tr>
+                    <td>@winners Round @Math.Abs(set.Round.Value)
+                        <a class="edit-fancybox" href="/set/@set.SetID">
+                            @if (Convert.ToBoolean(Session["userModerator"]))
+                            {
+                                <img src="/Image/edit.png" title="Update" />
+                            }
+                            else
+                            {
+                                            
+                                <img src="/Image/plus.png" title="More info" />
+                            }
+                        </a>
+                        <img src="/Image/loading.gif" class="loading hidden" />
+                    </td>
+                    <td>
+                        <a href="/player/@winnerURL">@winnerTag</a>
+                        @Html.Raw(set.WinnerCharacter.ImgTag())
+                    </td>
+                    <td>
+                        <a href="/player/@loserURL">@loserTag</a>
+                        @Html.Raw(set.LoserCharacter.ImgTag())
+                    </td>
+                </tr>
+                
+            }
+        </table>
+        <div class="bracketWrapper">
+            <a href="#" class="view-bracket" bracketName="@bracket.Key">Show bracket</a> <span
+                class="loading hidden">
+                <img src="/Image/loading.gif" /></span>
+            <div class="viewBracket hidden" bracketName="@bracket.Key">
+            </div>
+        </div>
+    }
+</div>
+<br />
+@if (Model.PoolsEvents.Count > 0)
+{
+    <div class="pools">
+        @foreach (var bracketNameToPool in Model.PoolsEvents)
+        {
+            <div>
+                <p>@bracketNameToPool.Key</p>
+                @foreach (SSBPD.Controllers.Pool pool in bracketNameToPool.Value)
+                {
+                    int poolSize = pool.wins.Keys.Count;
+                    <table class="pool" id="pool-@pool.PoolNum">
+                        <tr>
+                            <th>
+                                Pool @(pool.PoolNum + 1)
+                            </th>
+                            @foreach (int pid in pool.playerIDs)
+                            {
+                                string tag = Model.IdToPlayer[pid].Tag;
+                                string URL = Model.IdToPlayer[pid].URL;
+                                <th>
+                                    <a href="/player/@URL">@tag</a>
+                                </th>
+                            }
+                        </tr>
+                        @for (int row = 0; row < poolSize; row++)
+                        {
+                            Player player = Model.IdToPlayer[pool.playerIDs[row]];
+                            string tag = player.Tag;
+                            string URL = player.URL;
+                            <tr>
+                                <td>
+                                    <a href="/player/@URL">@tag</a>
+                                </td>
+                                @for (int oppID = 0; oppID < poolSize; oppID++)
+                                {
+                                    if (row == oppID)
+                                    {
+                                    <td class="vsself">
+                                    </td>
+                                    }
+                                    else if (@pool.wins[pool.playerIDs[row]].ContainsKey(pool.playerIDs[oppID]))
+                                    {
+                                        var cell = pool.wins[pool.playerIDs[row]][pool.playerIDs[oppID]];
+                                        string leftImg = Url.Content("/Image/Icons/" + cell.Item2 + ".png");
+                                        string rightImg = Url.Content("/Image/Icons/" + cell.Item3.ToString() + ".png");
+                                    <td>
+                                        @Html.Raw(cell.Item2.ImgTag())
+                                        @cell.Item1
+                                        @Html.Raw(cell.Item3.ImgTag())
+                                        <a class="edit-fancybox" href="/set/@cell.Item4">
+                                            @if (Convert.ToBoolean(Session["userModerator"]))
+                                            {
+                                                <img src="/Image/edit.png" title="Update" />
+                                            }
+                                            else
+                                            {
+                                            
+                                                <img src="/Image/plus.png" title="More info" />
+                                            }
+                                        </a>
+                                        <img src="/Image/loading.gif" class="loading hidden" />
+                                    </td>
+                                    
+                                        
+                                    }
+                                    else
+                                    {
+                                    <td class="unplayed">
+                                        Not played
+                                    </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </table>
+                }
+            </div>
+        }
+    </div>
+}

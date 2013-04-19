@@ -1,0 +1,138 @@
+﻿@model SSBPD.ViewModels.PlayerDetailViewModel
+@using SSBPD.Models
+@{
+    ViewBag.Title = Model.player.Tag;
+}
+<div>
+    <p>@Model.player.Tag
+        <img src="@Url.Content("/Image/Icons/" + @Model.player.CharacterMain.ToString() + ".png")" />
+        | <span class="ELO">@Convert.ToInt32(Model.player.ELO) ELO</span> | @Model.wins
+        wins - @Model.draws draws - @Model.losses losses (@String.Format("{0:#0}%", Model.ratio))</p>
+    <span>@Model.player.Region.DisplayString()</span>
+    <img src="@Url.Content("/Image/Flags/" + Model.player.Region.CountryCode() + ".png")" title="@Model.player.Region.DisplayString()" />
+</div>
+@{
+    int playerId = @Model.player.PlayerId;
+}
+<br />
+<input type="hidden" id="playerId" value="@playerId" />
+@if (Convert.ToInt32(Session["userId"]) > 0 && !Convert.ToBoolean(Session["userModerator"]))
+{
+    <div>
+        <span id="suggest">
+            <select id="regionValue">
+                <option value="">Suggest a region</option>
+                @foreach (Region suggestRegion in RegionUtils.Regions)
+                {
+                    int regionValue = (int)suggestRegion;
+                    <option value="@regionValue">@suggestRegion.DisplayString()</option>
+                }
+            </select>
+            <span class="smallspacer">&nbsp;</span>
+            <select id="characterValue">
+                <option value="">Suggest a character</option>
+                @foreach (Character character in CharacterUtils.Characters)
+                {
+                    int characterValue = (int)character;
+                    <option value="@characterValue">@character.DisplayString()</option>
+                }
+            </select>
+        </span>
+        <br />
+        <label for="toPlayerId">
+            Flag as another player:</label>
+        <select id="toPlayerId">
+            <option value="">Select player</option>
+            @foreach (Player player in Model.allPlayers)
+            {
+                <option value="@player.PlayerId">@player.Tag</option>
+            }
+        </select>
+        <br />
+        <label for="newTag">
+            Or specify a new tag:</label>
+        <input type="text" id="newTagFlag" /><br />
+        <a href="#" id="suggestLink">Submit suggestions</a>
+    </div>
+}
+@if (Convert.ToBoolean(Session["userModerator"]))
+{
+    <br />
+    <div id="updateWrapper">
+        <form id="update">
+        <label for="newTag">
+            New tag:</label>
+        <input type="text" name="newTag" />
+        <label for="newTag">
+            New region:</label>
+        <select name="newRegion">
+            <option value="">Select region</option>
+            @foreach (Region region in RegionUtils.Regions)
+            {
+                int value = (int)region;
+                <option value="@value">@region.DisplayString()</option>
+            }
+        </select>
+        <label for="newChar">
+            New main:</label>
+        <select name="newChar">
+            <option value="">Select character</option>
+            @foreach (Character character in CharacterUtils.Characters)
+            {
+                int value = (int)character;
+                <option value="@value">@character.ToString()</option>
+            }
+        </select>
+        <label for="overwrite">
+            Overwrite existing sets</label><input type="checkbox" name="overwrite" value="true" />
+        <a href="#" id="updatePlayerLink">Update this player</a>
+        </form>
+    </div>
+    <div>
+        <a href="/admin/assignsets/@Model.player.PlayerId">Assign sets to this player</a>
+    </div>
+    <div id="deletePlayer">
+        <p class="error" id="deleteError">
+        </p>
+        <a href="#" id="@Model.player.PlayerId">Delete this player</a>
+        <img class="loading hidden" src="/Image/loading.gif" />
+    </div>
+            
+}
+<div id="eloHistory">
+</div>
+<p>
+<a href="#" id="hideSets">Only sets with videos</a>
+</p>
+<p>
+    Recent sets:
+</p>
+<div style="float: left;">
+    <ul id="recentSets">
+        @foreach (var set in Model.sets)
+        {
+            string cl = set.hasVideo ? "video" : "novideo";
+            <li class="@cl">
+                @set.setMessage @Html.Raw(set.opponent.infoHTML(true, true))
+                at <a href="/tournament/@set.tournamentURL">@set.tournamentName</a> <a class="set-detail" href="/set/@set.setID">
+                    @if (Convert.ToBoolean(Session["userModerator"]))
+                    {
+                        <img src="/Image/edit.png" title="Update" border="0"/>
+                    }
+                    else
+                    {
+                                            
+                        <img src="/Image/plus.png" title="More info" />
+                    }
+                </a>
+                <img src="/Image/loading.gif" class="loading hidden" />
+                (<a href="/player/@Model.player.URL/versus/@set.opponent.URL">Match History</a>)
+                - @set.date.ToString("MM/dd/yyyy")
+            </li>
+        }
+    </ul>
+</div>
+<script type="text/javascript">
+   var eloData = @Html.Raw(Model.eloData);
+   var name = "@Model.player.Tag";
+</script>

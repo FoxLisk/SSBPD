@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SSBPD.Models.Player>
+@{
+    ViewBag.Title = "Merge Players";
+}
+
+<h2>MergePlayers</h2>
+<div>
+    <p>@ViewBag.MergeMessage</p>
+</div>
+<form action="" name="mergePlayersForm" method="post">
+<label for="fromPlayerId">Player to merge from:</label>
+<select name="fromPlayerId">
+@foreach (var player in Model)
+{
+    <option value="@player.PlayerId">@player.Tag</option>
+}
+</select>
+<label for="toPlayerId">Player to merge into:</label>
+<select name="toPlayerId">
+@foreach (var player in Model)
+{
+    <option value="@player.PlayerId">@player.Tag</option>
+}
+</select>
+<input type="submit" value="Merge" />
+</form>

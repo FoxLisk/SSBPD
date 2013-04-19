@@ -1,0 +1,13 @@
+﻿@model SSBPD.ViewModels.TournamentIndexViewModel
+@{
+    ViewBag.Title = "Tournaments";
+}
+<h2>
+    All Tournaments
+</h2>
+        <a href="/tournament">by date</a> - <a href="/tournament?sort=name">by name</a> - <a href="/tournament?sort=entrants">by entrants</a>
+<ul>
+@foreach (var tourney in Model.tournaments) {
+      <li><a href="/tournament/@tourney.URL"> @tourney.Name</a> - @tourney.Date.ToString("MM/dd/yyyy") | @Model.tournamentToEntrants[tourney.TournamentID] entrants</li> 
+}
+</ul>

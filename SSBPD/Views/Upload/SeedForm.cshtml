@@ -1,0 +1,30 @@
+﻿<div class="seed-tournament">
+    <p>
+        If you're here to get a tournament seeded, just upload a tio file with the playerlist
+        filled out and you will be presented with a new, seeded tio file!
+    </p>
+    <p>
+        Make sure that any players you have whose results we have are named correspondingly
+        - any players whose records cannot be found will use defaults, which will affect
+        the accuracy of the seeding.
+    </p>
+    <div>
+        <form name="seedTournament" action="/upload/seeding" enctype="multipart/form-data"
+        method="post">
+        <div>
+            <label for="file">
+                File:
+            </label>
+            <input type="file" name="file" />
+        </div>
+        <p>What kind of bracket are you seeding?</p>
+        Pools
+        <input type="radio" value="pools" name="bracketType" />
+        Elimination
+        <input type="radio" value="bracket" name="bracketType" />
+        <div>
+            <input type="submit" value="Seed tournament" />
+        </div>
+        </form>
+    </div>
+</div>

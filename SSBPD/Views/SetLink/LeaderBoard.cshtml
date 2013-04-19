@@ -1,0 +1,8 @@
+﻿@model Dictionary<string, int>
+
+<ol>
+@foreach (var kvp in Model.OrderByDescending(l => l.Value))
+{
+<li>@kvp.Key - @kvp.Value</li>
+}
+</ol>

@@ -1,0 +1,67 @@
+﻿@model SSBPD.ViewModels.FlaggedSetsViewModel
+@using SSBPD.ViewModels
+@using SSBPD.Models
+@{
+    ViewBag.Title = "Flagged Sets";
+}
+<h2>
+    Flagged sets</h2>
+<div class="container">
+    <div id="characterFlags">
+        <ul>
+            @foreach (var set in Model.FlaggedSets)
+            {
+                <li><a href="/player/@set.winner.URL">@set.winner.Tag</a> > <a href="/player/@set.loser.URL">@set.loser.Tag</a>
+                    at <a href="/tournament/@set.tournament.URL">@set.tournament.Name
+                    </a>
+                    @if (set.winnerFlags.Count() > 0)
+                    {
+                        <div>
+                            @set.winner.Tag
+                            <ul>
+                                @foreach (var kvp in set.winnerFlags)
+                                {
+                                    int charId = (int)kvp.Key;
+                                    <li>
+                                        @kvp.Key.ToString() - @kvp.Value flags <a href="#" winner="true" class="assign-character-set" setid="@set.setId" characterid="@charId">
+                                            assign</a> </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    @if (set.loserFlags.Count() > 0)
+                    {
+                        <div>
+                            @set.loser.Tag
+                            <ul>
+                                @foreach (var kvp in set.loserFlags)
+                                {
+                                    int charId = (int)kvp.Key;
+                                    <li>
+                                        @kvp.Key.ToString() - @kvp.Value flags <a href="#" class="assign-character-set" setid="@set.setId" characterid="@charId">
+                                            assign</a> </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+<div id="linkFlags">
+@foreach (var set in Model.linkFlaggedSets.Keys)
+{
+    var tournament = set.Tournament;
+foreach (var flag in Model.linkFlaggedSets[set])
+ {
+    <div>At <a href="/tournament/@tournament.URL">@tournament.Name</a>, the set @flag.winner.Tag > @flag.loser.Tag, 
+    the link <a href="@flag.setLink.URL">@flag.setLink.Title</a> has @flag.numFlags flag(s).
+    (<span><a href="#" setLinkId="@flag.setLink.SetLinkID" class="delete-set-link">Delete link</a></span>)
+    </div>
+ }
+}
+</div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SSBPD.Models.Tournament>
+@{
+    ViewBag.Title = "Home";
+}
+<div class="container">
+<div>
+<div>
+</div>
+</div>
+    <div class="about">
+        <p>This site is a compendium of as many Super Smash Bros. Melee results as we can find. Here's the things to do:</p>
+        <p>
+            If you have any saved <a href="http://allisbrawl.com/tio/">TIO</a> results you can
+            upload, please <a href="/upload">upload them</a>!</p>
+        <p>
+            If you are running a tournament and you'd like seed your bracket, you can do that <a href="/upload">here</a>.</p>
+        <p>
+            You might also like to explore the lists of <a href="/player">players</a>, <a href="/tournament">tournaments</a>,
+            or maybe check out some statistics by <a href="/region">region</a> or <a href="/character">character</a>.
+        </p>
+    </div>
+    <div class="recentTournaments">
+        <p>
+            Recent Tournaments (or <a href="/tournament">view all</a>):
+            </p>
+        
+            @foreach (var tournament in Model)
+            {
+                <div><a href="/tournament/@tournament.URL">@tournament.Name</a> - @tournament.Date.ToString("MM/dd/yyyy")</div>
+            }
+       
+    </div>
+    <div class="topPlayers">
+        <p>
+            Top rated players (or <a href="/player">view all</a>):
+            </p>
+        <ol>
+            @foreach (SSBPD.Models.Player player in ViewBag.Players)
+            {
+                <li>@Html.Raw(player.infoHTML(true,true))</li>
+                
+            }
+        </ol>
+    </div>
+</div>

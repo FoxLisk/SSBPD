@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Head to Head";
+}
+<table border="0">
+<tr>
+    <th width=33%><a href="/player/@ViewBag.Player1.PlayerId">@ViewBag.Player1.Tag</a> <img src="@Url.Content("~/Image/Icons/" + @ViewBag.Player1.CharacterMain.ToString() + ".png")" /></th>
+    <th class="spacer" width=3%></th>
+    <th width=33%><img src="@Url.Content("~/Image/Icons/" + @ViewBag.Player2.CharacterMain.ToString() + ".png")" /> <a href="/player/@ViewBag.Player2.PlayerId">@ViewBag.Player2.Tag</a> </th>
+</tr>
+</table>
+<ul>
+@foreach (SSBPD.Models.Set set in ViewBag.Sets)
+{
+    bool playerOneWon = set.WinnerID == ViewBag.Player1.PlayerId;
+    string win = playerOneWon ? "Win" : "Loss";
+    if (set.isDraw) { win = "Draw"; }
+<li class="@win">
+    @win on @set.DatePlayed.ToString("M/d/yy") at <a href="/tournament/@set.Tournament.TournamentID">@set.Tournament.Name</a>
+</li>
+}
+</ul>

@@ -1,0 +1,9 @@
+*.sdf
+*.mdf
+*.dll
+*.ldf
+*.pdb
+SSBPD/obj/*
+SSBPD/Files/*
+*~
+SSBPD.suo

@@ -1,0 +1,8 @@
+﻿@model IQueryable<SSBPD.Models.Tournament>
+@{
+    Layout = null;
+}
+@foreach (SSBPD.Models.Tournament t in Model)
+{
+    <option value="@t.TournamentID">@t.Name</option>
+}

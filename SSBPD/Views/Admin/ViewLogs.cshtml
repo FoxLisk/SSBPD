@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SSBPD.Models.LogMessage>
+@{
+    ViewBag.Title = "Logs";
+}
+<h2>
+    Logs</h2>
+<table>
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Message
+        </th>
+    </tr>
+    @foreach (var msg in Model)
+    {
+        <tr>
+            <td>@msg.Date
+            </td>
+            <td>@Html.Raw(msg.Message)
+            </td>
+        </tr>
+    }
+</table>

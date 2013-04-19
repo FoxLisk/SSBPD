@@ -1,0 +1,22 @@
+﻿@using SSBPD.Models
+@model Dictionary<Character, IEnumerable<Player>>
+@{
+    ViewBag.Title = "Characters home";
+}
+@foreach (Character character in Model.Keys)
+{
+    int divClass = (int)character % 4;
+    <div class="@divClass">
+        <p><a href="/character/@character.ToString()">@character.DisplayString()</a> <img src="@Url.Content("~/Image/Icons/" + character.ToString() + ".png")" />
+        </p>
+        <ol>
+        @foreach (Player player in Model[character])
+        {
+        <li>
+            @Html.Raw(player.infoHTML(false, true))
+        </li>
+        }
+        </ol>
+    </div>
+
+}

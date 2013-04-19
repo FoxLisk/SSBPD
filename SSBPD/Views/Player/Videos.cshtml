@@ -1,0 +1,39 @@
+﻿@model SSBPD.ViewModels.PlayerDetailViewModel
+@using SSBPD.Models
+@{
+    ViewBag.Title = "Videos";
+}
+
+<div>
+    <p>@Model.player.Tag
+        <img src="@Url.Content("/Image/Icons/" + @Model.player.CharacterMain.ToString() + ".png")" />
+        | <span class="ELO">@Convert.ToInt32(Model.player.ELO) ELO</span> | @Model.wins
+        wins - @Model.draws draws - @Model.losses losses (@String.Format("{0:#0}%", Model.ratio))</p>
+    <span>@Model.player.Region.DisplayString()</span>
+    <img src="@Url.Content("/Image/Flags/" + Model.player.Region.CountryCode() + ".png")" title="@Model.player.Region.DisplayString()" />
+</div>
+
+<div style="float: left;">
+    <ul id="recentSets">
+        @foreach (var set in Model.sets)
+        {
+            <li>
+                @set.setMessage @Html.Raw(set.opponent.infoHTML(true, true))
+                at <a href="/tournament/@set.tournamentURL">@set.tournamentName</a> <a class="set-detail" href="/set/@set.setID">
+                    @if (Convert.ToBoolean(Session["userModerator"]))
+                    {
+                        <img src="/Image/edit.png" title="Update" boder="0"/>
+                    }
+                    else
+                    {
+                                            
+                        <img src="/Image/plus.png" title="More info" />
+                    }
+                </a>
+                <img src="/Image/loading.gif" class="loading hidden" />
+                (<a href="/player/@Model.player.URL/versus/@set.opponent.URL">Match History</a>)
+                - @set.date.ToString("MM/dd/yyyy")
+            </li>
+        }
+    </ul>
+</div>

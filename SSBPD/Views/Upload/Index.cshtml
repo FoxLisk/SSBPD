@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Upload Results";
+}
+<div>@ViewBag.AccountCreatedMessage</div>
+<div>@ViewBag.UploadMessage</div>
+<div>
+    You need an account to upload files now. It's easy, I promise. Go ahead and make
+    an account and start uploading all your sweet, delicious tournament results.</div>
+<br />
+<div class="create-account">
+    <form name="createAccount" method="post" action="/upload/newaccount">
+    <div>
+        <label for="username">
+            Username:</label>
+        <input type="text" name="username" id="username-create" />
+        <div id="usernameError" class="error">@ViewBag.UsernameError</div>
+    </div>
+    <div>
+        <label for="password">
+            Password:</label>
+        <input type="password" name="password" id="password-create" />
+        <div id="passwordError" class="error">@ViewBag.PasswordError</div>
+    </div>
+    <div>
+        <label for="emailAddress">
+            Email address:</label>
+        <input type="text" name="emailAddress" id="email-create" />
+        <div id="emailError" class="error">@ViewBag.EmailError</div>
+    </div>
+    <input type="submit" onclick="return validateAccount();" value="Create account" />
+    <br />
+    </form>
+    <br />
+</div>
+@Html.Partial(@Url.Content("~/Views/Upload/SeedForm.cshtml"))

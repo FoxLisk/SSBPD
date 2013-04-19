@@ -1,0 +1,11 @@
+﻿.container {
+    clear: both;
+}
+
+.recentTournaments {
+    float: left;
+}
+
+.topPlayers {
+    float: right;
+}

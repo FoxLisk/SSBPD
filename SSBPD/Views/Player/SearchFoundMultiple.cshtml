@@ -1,0 +1,13 @@
+﻿@model IQueryable<SSBPD.Models.Player>
+@{
+    ViewBag.Title = "Search Results";
+}
+<div>
+Sorry, no matches found. Did you mean one of these players?
+</div>
+<ul>
+@foreach (var player in Model)
+{
+    <li><a href="/player/@player.PlayerId?noRewrite=true">@player.Tag</a></li>
+}
+</ul>

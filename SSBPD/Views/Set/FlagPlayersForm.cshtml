@@ -1,0 +1,30 @@
+﻿@using SSBPD.Models
+@{
+    Layout = null;
+}
+
+<div>
+    Was the winner's character wrong? Let us know.</div>
+<form setId="@Model.set.SetID">
+<select name="winnerCharacter">
+    <option value="">Select New Winner Character</option>
+    @foreach (Character character in CharacterUtils.Characters)
+    {
+        int val = (int)character;
+        <option value="@val">@character.ToString()</option>
+    }
+</select>
+<br />
+<div>
+    How about the loser's character?</div>
+<select name="loserCharacter">
+    <option value="">Select New Loser Character</option>
+    @foreach (Character character in CharacterUtils.Characters)
+    {
+        int val = (int)character;
+        <option value="@val">@character.ToString()</option>
+    }
+</select>
+<br />
+<a href="#" class="submitCharacterFlags">Let us know!</a>
+</form>

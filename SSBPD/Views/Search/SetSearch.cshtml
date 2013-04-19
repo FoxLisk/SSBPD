@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SSBPD.Controllers.SearchController.DisplaySetInfo>
+@using SSBPD.Models;
+@{
+    ViewBag.Title = "Set Search Results";
+}
+@if (Model.Count() == 0)
+{
+<div>No results found. <a href="/search/set">Go back</a>.</div>
+}
+@foreach (var set in Model.OrderByDescending(set => set.tournament.Date))
+{
+    <div>
+        <a class="set-detail" href="/set/@set.setId">
+            @if (Convert.ToBoolean(Session["userModerator"]))
+            {
+                <img src="/Image/edit.png" title="Update" />
+            }
+            else
+            {
+                                            
+                <img src="/Image/plus.png" title="More info" />
+            }
+        </a>
+        <img src="/Image/loading.gif" class="loading hidden" />
+        <a href="/player/@set.winner.URL">@set.winner.Tag</a> @Html.Raw(set.winnerCharacter.ImgTag()) @Html.Raw(set.winner.Region.ImgTag())
+        (Current: @Convert.ToInt32(set.winner.ELO) At time of set: @set.winnerElo) > <a href="/player/@set.loser.URL">@set.loser.Tag</a>
+        @Html.Raw(set.loserCharacter.ImgTag()) @Html.Raw(set.loser.Region.ImgTag()) (Current:
+        @Convert.ToInt32(set.loser.ELO) At time of set: @set.loserElo) at <a href="/tournament/@set.tournament.URL">@set.tournament.Name</a>
+        on @set.tournament.Date.ToString("MM/dd/yyyy")
+    </div>
+
+}

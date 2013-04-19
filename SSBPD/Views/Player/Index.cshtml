@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SSBPD.Models.Player>
+@using SSBPD.Models
+@{
+    ViewBag.Title = "Players";
+}
+<h2>
+    All players
+</h2>
+<div id="playerContainer">
+    <div id="allPlayers">
+        <a href="/player">by tag</a> - <a href="/player?sort=rating">by rating</a>
+        @if (Request["sort"] != null && Request["sort"].Equals("rating"))
+        {
+            <ol>
+                @foreach (var player in Model.Take(50))
+                {
+                    <li>@Html.Raw(player.infoHTML(true, true))</li>   
+                }
+            </ol>
+            <ul>
+            @foreach (var player in Model.Skip(50))
+            {
+            <li>@Html.Raw(player.infoHTML(true,true))</li>
+            }
+            </ul>
+        }
+        else
+        {
+        <ul>
+            @foreach (var player in Model)
+            {
+                <li>@Html.Raw(player.infoHTML(true,true))</li>
+            }
+        </ul>
+        }
+    </div>
+</div>

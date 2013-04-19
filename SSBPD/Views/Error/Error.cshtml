@@ -1,0 +1,13 @@
+﻿<div>
+    Sorry, nothing found here. Try going <a href="/">home</a>. 
+    @if (ViewBag.Matches != null)
+    {
+    <span>Or try one of these links:</span>
+    <ul>
+        @foreach (string match in ViewBag.Matches)
+        {
+        <li><a href="/@match">@match</a></li>
+        }
+    </ul>
+    }
+</div>

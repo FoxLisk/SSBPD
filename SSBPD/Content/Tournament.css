@@ -1,0 +1,40 @@
+﻿td.vsself
+{
+    background-color: #000000;
+}
+td.unplayed
+{
+    background-color: #CCCCCC;
+}
+.bottom
+{
+    border-bottom: 1px solid;
+}
+.right
+{
+    border-right: 1px solid;
+}
+.left
+{
+    border-left: 1px solid;
+}
+table.viewbracket td
+{
+    text-align: center;
+    vertical-align: text-bottom;
+    padding: 0 0 0 0;
+}
+
+table.viewbracket td.bye
+{
+    font-style: italic;
+}
+
+div.viewbracket
+{
+    float: left;
+}
+div.bracket
+{
+    float: left;
+}

@@ -1,0 +1,35 @@
+﻿@model SSBPD.ViewModels.VersusRegionViewModel
+@using SSBPD.Models;
+@using SSBPD.ViewModels;
+@{
+    string groupOneTitle = string.Join(", ", Model.regionOneList.Select(r => r.DisplayString()));
+    string groupTwoTitle = string.Join(", ", Model.regionTwoList.Select(r => r.DisplayString()));
+
+    ViewBag.Title = groupOneTitle + " Versus " + groupTwoTitle;
+
+    <div>Group One: @groupOneTitle</div>
+    <div>Group Two: @groupTwoTitle</div>
+<table>
+    <tr>
+        <th>Group One</th>
+        <th>Group Two</th>
+        <th>Tournament</th>
+        <th>Date</th>
+    </tr>
+    @foreach (VersusSet set in Model.sets)
+    {
+        string leftClass = set.regionOneWon ? "win" : "loss";
+        string rightClass = set.regionOneWon ? "loss" : "win";
+        if (set.isDraw){
+            leftClass = "draw";
+            rightClass = "draw";   
+        }
+        <tr class="set">
+            <td class="@leftClass"><a href="/player/@set.regionOnePlayer.URL">@set.regionOnePlayer.Tag</a></td>
+            <td class="@rightClass"><a href="/player/@set.regionTwoPlayer.URL">@set.regionTwoPlayer.Tag</a></td>
+            <td><a href="/tournament/@set.tournament.URL">@set.tournament.Name</a></td>
+            <td>@set.datePlayed.ToString("MM/dd/yyyy")</td>
+        </tr>
+    }
+</table>
+}

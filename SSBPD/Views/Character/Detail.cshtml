@@ -1,0 +1,17 @@
+﻿@using SSBPD.Models
+@using SSBPD.ViewModels
+@model CharacterDetailViewModel
+@{
+    ViewBag.Title = @Model.characterName;
+}
+
+<div>@Model.characterName players: (Average rating: @Model.averageElo)</div>
+<ol>
+@foreach (Player player in @Model.players)
+{
+<li>
+@Html.Raw(player.infoHTML(false, true))
+</li>
+
+}
+</ol>

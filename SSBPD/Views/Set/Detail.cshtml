@@ -1,0 +1,17 @@
+﻿@model SSBPD.ViewModels.SetDetailViewModel
+@using SSBPD.Models;
+@{Layout = null;}
+@Html.Partial("Info", Model)
+@if (Convert.ToInt32(Session["userId"]) > 0)
+{
+    if (!Convert.ToBoolean(Session["userModerator"])){
+    @Html.Partial("FlagPlayersForm")
+    }
+    <br />
+    @Html.Partial("AddVideoForm")
+}
+else
+{
+<div>Please log in to add videos.</div>
+
+}

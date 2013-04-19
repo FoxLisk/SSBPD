@@ -1,0 +1,61 @@
+﻿@model SSBPD.ViewModels.RegionGroupViewModel
+@using SSBPD.ViewModels
+@{
+    ViewBag.Title = "Region";
+}
+@using SSBPD.Models
+@{
+    string regionTitle = string.Join(", ", Model.Regions.Select(r => r.DisplayString()));
+    <h2>
+        Players in @regionTitle</h2>
+}
+<div id="container">
+    <form name="regionVersus" action="/region/versus" method="post">
+    @foreach (Region region in Model.Regions)
+    {
+        int regionVal = (int)region;
+        <input type="hidden" name="regionOne" value="@regionVal" />
+    }
+    <div id="regionPlayers">
+        <div class="elo">
+            Average rating: @Model.AverageElo
+        </div>
+        <div class="elo hidden">
+            Average rating: @Model.AverageActiveELO
+        </div>
+        <p>
+            <a href="#" id="toggleInactive">Hide inactive players</a>
+        </p>
+        <ol>
+            @foreach (RegionViewPlayer player in Model.Players)
+            {
+                string liclass = player.Active ? "active" : "inactive";
+                <li class="@liclass">
+                    @Html.Raw(player.player.infoHTML(true, true))
+                </li>
+            }
+        </ol>
+    </div>
+    <div class="spacer">
+        <input type="submit" value="Go" />
+    </div>
+    <div id="otherRegions">
+        <p>
+            History vs. other regions:
+        </p>
+        @{
+            foreach (Region otherRegion in RegionUtils.Regions)
+            {
+                int otherRegionValue = (int)otherRegion;
+                if (Model.Regions.Contains(otherRegion) || otherRegion.Equals(Region.NoRegion))
+                {
+                    continue;
+                }
+            <div>
+                <input type="checkbox" name="regionTwo" value = "@otherRegionValue"/>@otherRegion.DisplayString()</div>
+
+            }   
+        }
+    </div>
+    </form>
+</div>

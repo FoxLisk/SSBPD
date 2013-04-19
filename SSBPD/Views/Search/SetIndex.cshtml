@@ -1,0 +1,142 @@
+﻿@using SSBPD.Models;
+@{
+    ViewBag.Title = "Set Search";
+}
+<p>
+    Leave any fields blank to have them ignored in your search.
+</p>
+    <form action="/search/set" method="post">
+    <input type="submit" value="Search" />
+    <br />
+    After @Html.Partial("Date", "start")
+    <br />
+    Before @Html.Partial("Date", "end")
+    <br />
+    Has video?
+    <br />
+    Yes <input type="radio" value="yes" name="hasVideo" />
+    No <input type="radio" value="no" name="hasVideo" />
+    Either <input type="radio" value="either" name="hasVideo" checked="checked"/>
+    <br />
+<div id="winnerOptions">
+    <p>
+        Winner criteria:
+    </p>
+    <label for="winnerminrating">
+        Minimum rating:</label><input type="text" name="winnerminrating" />
+        <br />
+    <label for="winnermaxrating">
+        Maximum rating:</label><input type="text" name="winnermaxrating" />
+    <br />
+    <label for="winnerRatingType">
+        Current rating:</label><input type="radio" value="current" name="winnerRatingType"
+            checked="checked" />
+    <br />
+    <label for="winnerRatingType">
+        Rating when set was played:</label><input type="radio" value="setTime" name="winnerRatingType" />
+    <br />
+    Characters:
+    <br />
+    <input type="checkbox" class="checkAllCharacters" />select all
+    <ul class="characterList">
+        @{
+            var winnercharacters = CharacterUtils.Characters;
+            while (winnercharacters.Count() > 0)
+            {
+            <li>
+                @foreach (var character in winnercharacters.Take(4))
+                {
+                    int val = (int)character;
+                    <input type="checkbox" name="winnercharacters" value="@val" />
+                    @Html.Raw(character.ImgTag())
+                }
+            </li>
+                winnercharacters = winnercharacters.Skip(4);
+            }
+        }
+    </ul>
+    <br />
+    Regions:
+    <br />
+    <input type="checkbox" class="checkAllRegions" />select all
+    <ul class="regionList">
+        @{
+            var winnerregions = RegionUtils.Regions;
+            while (winnerregions.Count() > 0)
+            {
+            <li>
+                @foreach (var region in winnerregions.Take(2))
+                {
+                    int val = (int)region;
+                
+                    <span class="region"><input type="checkbox" name="regions" value="@val" />@Html.Raw(region.ImgTag()) @region.DisplayString()</span>
+                
+                }
+            </li>
+                winnerregions = winnerregions.Skip(2);
+            }
+        }
+    </ul>
+</div>
+<div id="loserOptions">
+    <p>
+        Loser criteria:
+    </p>
+    <label for="loserminrating">
+        Minimum rating:</label><input type="text" name="loserminrating" />
+        <br />
+    <label for="losermaxrating">
+        Maximum rating:</label><input type="text" name="losermaxrating" />
+    <br />
+    <label for="winnerRatingType">
+        Current rating:</label><input type="radio" value="current" name="loserRatingType"
+            checked="checked" />
+    <br />
+    <label for="winnerRatingType">
+        Rating when set was played:</label><input type="radio" value="setTime" name="loserRatingType" />
+    <br />
+    Characters:
+    <br />
+    <input type="checkbox" class="checkAllCharacters" />select all
+    <ul class="characterList">
+        @{
+            var losercharacters = CharacterUtils.Characters;
+            while (losercharacters.Count() > 0)
+            {
+            <li>
+                @foreach (var character in losercharacters.Take(4))
+                {
+                    int val = (int)character;
+                    <input type="checkbox" name="losercharacters" value="@val" />
+                    @Html.Raw(character.ImgTag())
+                }
+            </li>
+                losercharacters = losercharacters.Skip(4);
+            }
+        }
+    </ul>
+    <br />
+    Regions:
+    <br />
+    <input type="checkbox" class="checkAllRegions" />select all
+    <ul class="regionList">
+        @{
+            var loserregions = RegionUtils.Regions;
+            while (loserregions.Count() > 0)
+            {
+            <li>
+                @foreach (var region in loserregions.Take(2))
+                {
+                    int val = (int)region;
+                
+                    <span class="region"><input type="checkbox" name="loserregions" value="@val" />@Html.Raw(region.ImgTag()) @region.DisplayString()</span>
+                
+                }
+            </li>
+                loserregions = loserregions.Skip(2);
+            }
+        }
+    </ul>
+    <input type="submit" value="Search" />
+    </form>
+</div>

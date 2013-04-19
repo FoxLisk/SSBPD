@@ -1,0 +1,82 @@
+﻿div#regionOne
+{
+    float: left;
+}
+div#regionTwo
+{
+    float: left;
+}
+div#stats
+{
+    float: left;
+    text-align: center;
+    margin-top: 100px;
+}
+
+div.players
+{
+    clear: both;
+}
+div.player
+{
+    clear: both;
+}
+
+span.tag
+{
+    float: left;
+}
+span.elo
+{
+    float: right;
+}
+
+div.column
+{
+    width: 28%;
+}
+div.spacer
+{
+    float: left;
+    width: 8%;
+}
+
+p.regionName
+{
+    text-align: center;
+    font-size: large;
+}
+
+.win
+{
+    background-color:#AAEEAA;
+    color:Black;
+    text-align:center;
+}
+.loss
+{
+    background-color:#EEAAAA;
+    color:Black;
+    text-align:center;
+}
+.draw 
+{
+    background-color: #727272;
+    color:Black;
+    text-align:center;
+}
+
+#regionPlayers 
+{
+    float:left;
+    width:40%;
+}
+#otherRegions 
+{
+    float:left;
+    width:40%;
+}
+.center 
+{
+    text-align:center;
+}

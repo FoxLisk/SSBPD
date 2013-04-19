@@ -1,0 +1,32 @@
+﻿@using SSBPD.Models;
+@model SSBPD.ViewModels.SetDetailViewModel
+@{Layout = null;}
+@Html.Partial("Info", Model)
+<form>
+<select name="winnerChar" setid="@Model.set.SetID">
+    <option value="">Select New Winner Character</option>
+    @foreach (Character character in CharacterUtils.Characters)
+    {
+        int val = (int)character;
+        <option value="@val">@character.ToString()</option>
+    }
+</select>
+<br />
+<select name="loserChar" setid="@Model.set.SetID">
+    <option value="">Select New Loser Character</option>
+    @foreach (Character character in CharacterUtils.Characters)
+    {
+        int val = (int)character;
+        <option value="@val">@character.ToString()</option>
+    }
+</select>
+<br />
+<input type="checkbox" name="switchWinner" value="true" /><label for="switchWinner">Switch
+    who won this set?</label>
+<br />
+<input type="checkbox" name="toDraw" value="true" /><label for="toDraw">Turn this set
+    to a draw?</label>
+<br />
+<a href="#" setId="@Model.set.SetID" class="setUpdate">Update set</a>
+</form>
+@Html.Partial("AddVideoForm", Model)

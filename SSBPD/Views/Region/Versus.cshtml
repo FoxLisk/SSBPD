@@ -1,0 +1,72 @@
+﻿@model SSBPD.ViewModels.VersusRegionViewModel
+@using SSBPD.Models;
+@{
+    string groupOneTitle = string.Join(", ", Model.regionOneList.Select(r => r.DisplayString()));
+    string groupTwoTitle = string.Join(", ", Model.regionTwoList.Select(r => r.DisplayString()));
+    <h2 class="center">
+        @groupOneTitle vs @groupTwoTitle</h2>
+    ViewBag.Title = "Regions";
+    <div class="container" style="clear: both;">
+        <div id="regionOne" class="column">
+            <p class="regionName">@groupOneTitle</p>
+            <div class="players">
+                <div class="player">
+                    <span class="tag">Player</span> <span class="elo">Rating</span>
+                </div>
+                <div class="player">
+                    &nbsp;</div>
+                @foreach (Player player in Model.regionOnePlayers)
+                {
+                    <div class="player">
+                        <span class="tag"><a href="/player/@player.URL">@player.Tag</a> @Html.Raw(@player.CharacterMain.ImgTag()) - @Html.Raw(@player.Region.ImgTag())</span> <span class="elo">@Convert.ToInt32(player.ELO)</span>
+                    </div>
+                }
+                <div class="player">
+                    &nbsp;</div>
+                <div class="player">
+                    <span class="tag">Average:</span><span class="elo">@Model.regionOneAverageELO</span>
+                </div>
+            </div>
+        </div>
+        <div class="spacer">
+            &nbsp;</div>
+        <div id="stats" class="column">
+            @{
+                string regionOneQueryString = string.Join(",", Model.regionOneList.Select(r => (int)r));
+                string regionTwoQueryString = string.Join(",", Model.regionTwoList.Select(r => (int)r));
+            
+                <form action="/region/versus/sets" method="post">
+                <input type="hidden" name="regionOne" value="@Html.Raw(regionOneQueryString)" />
+                <input type="hidden" name="regionTwo" value="@Html.Raw(regionTwoQueryString)" />
+                @Model.regionOneWins - @Model.draws - @Model.regionTwoWins
+                <br />
+                <input type="submit" value="View sets" />
+                </form>
+            }
+        </div>
+        <div class="spacer">
+            &nbsp;</div>
+        <div id="regionTwo" class="column">
+            <p class="regionName">@groupTwoTitle</p>
+            <div class="players">
+                <div class="player">
+                    <span class="tag">Player</span> <span class="elo">Rating</span>
+                </div>
+                <div class="player">
+                    &nbsp;</div>
+                @foreach (Player player in Model.regionTwoPlayers)
+                {
+                    <div class="player">
+                        <span class="tag"><a href="/player/@player.URL">@player.Tag</a> @Html.Raw(@player.CharacterMain.ImgTag()) - @Html.Raw(@player.Region.ImgTag())</span> <span class="elo">@Convert.ToInt32(player.ELO)</span>
+                    </div>
+                }
+                <div class="player">
+                    &nbsp;</div>
+                <div class="player">
+                    <span class="tag">Average:</span><span class="elo">@Model.regionTwoAverageELO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

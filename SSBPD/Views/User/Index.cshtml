@@ -1,0 +1,23 @@
+﻿@using SSBPD.ViewModels;
+@model UserViewModel
+@{
+    ViewBag.Title = Model.user.username + " Home";
+}
+<p class="error">@Model.msg</p>
+<div>
+    Your current user name is: @Model.user.username
+</div>
+<div>
+    Your current email is: @Model.user.email
+</div>
+(In case you forgot)
+<br />
+<a href="/user/customregions">Manage your custom region groups</a>
+<br />
+<form action="/user/update" id="update" method="post">
+<label for="oldPassword">
+    Current password:</label><input type="password" name="oldPassword" />
+<label for="newPassword">
+    New password:</label><input type="password" name="newPassword" />
+<input type="submit" value="Update" />
+</form>

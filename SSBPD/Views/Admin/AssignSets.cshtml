@@ -1,0 +1,23 @@
+﻿@model SSBPD.Models.Player
+@{
+    ViewBag.Title = "AssignSets";
+}
+
+<h2>Assign Sets</h2>
+<div>
+You are assigning sets to @Model.Tag 
+</div>
+<form id="assignSets" method="post" action="/admin/assignsets/@Model.PlayerId">
+<label for="fromPlayer">Assign sets from:</label>
+<select name="fromPlayer">
+<option value="">---Select player---</option>
+@foreach (SSBPD.Models.Player player in ViewBag.AllPlayers)
+{
+    <option value="@player.PlayerId">@player.Tag</option>
+}
+</select>
+<label for="fromTournament">At tournament:</label>
+<select name="fromTournament">
+</select>
+<input type="submit" value="Assign" />
+</form>

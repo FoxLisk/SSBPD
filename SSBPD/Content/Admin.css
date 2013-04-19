@@ -1,0 +1,23 @@
+﻿table.adminTable
+{
+    margin: auto;
+    width: 100%;
+}
+
+div#tagFlags
+{
+    float: left;
+}
+div#characterFlags
+{
+    float: left;
+}
+div#regionFlags
+{
+    float:left;
+}
+
+div.container
+{
+    clear:both;
+}

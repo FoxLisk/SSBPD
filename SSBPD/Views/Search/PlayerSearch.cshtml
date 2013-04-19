@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SSBPD.Models.Player>
+@{
+    ViewBag.Title = "Player Search Results";
+}
+
+<ol>
+
+@if (Model.Count() == 0)
+{
+<div>No results found. <a href="/search/player">Go back</a>.</div>
+}
+@foreach (var player in Model)
+{
+<li>@Html.Raw(player.infoHTML(true, true))</li>
+}
+</ol>

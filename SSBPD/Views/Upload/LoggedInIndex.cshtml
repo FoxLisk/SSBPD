@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Upload Results";
+}
+<div>
+    When you upload TIO files, pay attention to the following:
+    <ul>
+        <li>If your tournament includes players who already have records up, please make sure
+            they are entered correctly. That is, that they are not using an unusual tag, and
+            that their tag is spelled corectly.</li>
+        <li>Remove all Melee singles events from the file that aren’t regular Melee singles
+            tournaments. We don't want low tier bracket results, or anyother formats that are
+            not played with relatively standard rulesets.</li>
+        <li>Make sure that the date in the file is the date the tournament actually took place.</li>
+        <li>If you need to get in touch about anything, post in <a href="http://www.smashboards.com/showthread.php?t=318870">
+            the thread</a>, or <a href="mailto:ancorwin+ssbpd@gmail.com">email me</a>.</li>
+    </ul>
+</div>
+<p class="error">@ViewBag.UploadMessage</p>
+<div class="upload-file">
+    <form name="uploadForm" action="/upload" enctype="multipart/form-data" method="post">
+    <div>
+        <label for="file">
+            File:
+        </label>
+        <input type="file" name="file" />
+    </div>
+    <div>
+        <input type="submit" value="Upload results" />
+    </div>
+    </form>
+</div>
+@Html.Partial(@Url.Content("~/Views/Upload/SeedForm.cshtml"))

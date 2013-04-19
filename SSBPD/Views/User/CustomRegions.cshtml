@@ -1,0 +1,37 @@
+﻿@using SSBPD.Models
+@model SSBPD.ViewModels.CustomRegionsViewModel
+@{
+    ViewBag.Title = "Custom Regions";
+}
+<a href="#" id="showCreate">Create new region</a>
+<p class="error" id="createError">
+</p>
+<form id="createCustomRegion" action="/customregions/create" method="post" class="hidden">
+<input type="submit" value="Create new region group" />
+<label for="name">
+    Name for your new custom region:</label><input name="name" type="text" />
+<p>
+    Select regions to include</p>
+@foreach (var region in RegionUtils.Regions)
+{
+    if (region == Region.NoRegion) { continue; }
+    int val = (int)region;
+    <div>
+        <input type="checkbox" name="regions" value="@val" />@region.DisplayString() @Html.Raw(region.ImgTag())
+    </div>
+}
+<input type="submit" value="Create new region group" />
+</form>
+<ul>
+    @foreach (var cr in @Model.customRegions)
+    {
+        <li crId="@cr.CustomRegionID"><a href="#" crId="@cr.CustomRegionID" class="showCustomRegion">[+]</a> @cr.Name (<a href="#" crId="@cr.CustomRegionID" class="delete-region">delete</a>)
+            <ol crId="@cr.CustomRegionID" class="hidden">
+                @foreach (var region in cr.getRegions())
+                {
+                    <li>@region.DisplayString() @Html.Raw(region.ImgTag())</li>
+                }
+            </ol>
+        </li>
+    }
+</ul>

@@ -1,0 +1,75 @@
+﻿@using SSBPD.ViewModels;
+@using SSBPD.Models;
+@model FlaggedPlayersViewModel
+@{
+    ViewBag.Title = "FlaggedPlayers";
+}
+<h2>
+    Flagged Players</h2>
+<div class="container">
+    <div id="tagFlags">
+        <p>
+            New Tags</p>
+        <ul>
+            @foreach (int playerId in Model.TagFlags.Keys)
+            {
+                Player player = Model.IdToPlayer[playerId];
+                <li class="playerTagFlags">@Html.Raw(@player.infoHTML(true, true)) has received
+                    the following tags: (<a href="#" class="delete-tag-flags" id="@player.PlayerId">delete
+                        all</a>)
+                    <ul>
+                        @foreach (var kvp in Model.TagFlags[playerId])
+                        {
+                            <li>@kvp.Key - @kvp.Value flags</li>
+                        }
+                    </ul>
+                </li>
+
+            }
+        </ul>
+    </div>
+    <div id="characterFlags">
+        <p>
+            New Character Main</p>
+        <ul>
+            @foreach (int playerId in Model.CharacterFlags.Keys)
+            {
+                Player player = Model.IdToPlayer[playerId];
+                <li class="playerCharacterFlags">@Html.Raw(@player.infoHTML(true, true)) has received
+                    the following tags: (<a href="#" class="delete-character-flags" playerid="@player.PlayerId">delete
+                        all</a>)
+                    <ul>
+                        @foreach (var kvp in Model.CharacterFlags[playerId])
+                        {
+                            int characterValue = (int)kvp.Key;
+                            <li>@kvp.Key - @kvp.Value flags (<label for="overwrite">Overwrite existing sets</label><input type="checkbox" id="overwrite" /><a href="#" class="assign-character-link" characterValue="@characterValue" playerId="@playerId">assign</a>)</li>
+                        }
+                    </ul>
+                </li>
+
+            }
+        </ul>
+    </div>
+    <div id="regionFlags">
+        <p>
+            New Region</p>
+        <ul>
+            @foreach (int playerId in Model.RegionFlags.Keys)
+            {
+                Player player = Model.IdToPlayer[playerId];
+                <li class="playerRegionFlags">@Html.Raw(@player.infoHTML(true, true)) has received
+                    the following tags: (<a href="#" class="delete-region-flags" playerId="@player.PlayerId">delete
+                        all</a>)
+                    <ul>
+                        @foreach (var kvp in Model.RegionFlags[playerId])
+                        {
+                            int regionValue = (int)kvp.Key;
+                            <li>@kvp.Key.DisplayString() - @kvp.Value flags (<a href="#" class="assign-region-link" regionValue="@regionValue" playerId="@player.PlayerId">assign</a>)</li>
+                        }
+                    </ul>
+                </li>
+
+            }
+        </ul>
+    </div>
+</div>

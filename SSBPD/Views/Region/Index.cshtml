@@ -1,0 +1,19 @@
+﻿@model SSBPD.ViewModels.RegionIndexViewModel
+@using SSBPD.Models
+@{
+    ViewBag.Title = "Regions";
+}
+<form action="/region" method="post">
+<input type="submit" value="View selected regions" />
+@foreach (CustomRegion cr in @Model.customRegions)
+{
+<div><input type="checkbox" name="regions" value="@cr.Value" />@cr.Name</div>
+}
+@foreach (Region region in RegionUtils.Regions)
+{
+    int val = (int)region;
+    <div><input type="checkbox" name="regions" value="@val" />@region.DisplayString() @Html.Raw(region.ImgTag())</div>
+}
+<br />
+<input type="submit" value="View selected regions" />
+</form>

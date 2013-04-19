@@ -1,0 +1,236 @@
+﻿@using SSBPD.Models
+@{
+    ViewBag.Title = "Admin";
+}
+@if (!Convert.ToBoolean(Session["userModerator"]))
+{
+    <div>
+        You must be an admin or mod to view this page.</div>
+    <form name="loginForm" action="/admin/login" method="post">
+    <label for="username">
+        Username:</label>
+    <input type="text" name="username" />
+    <label for="password">
+        Password:</label>
+    <input type="password" name="password" />
+    <input type="submit" value="Log in" />
+    </form>
+}
+else
+{
+    bool admin = Convert.ToBoolean(Session["userAdmin"]);
+    <div class="layout">
+        <div>
+            <a href="/admin/mergePlayers">Merge players</a></div>
+        <div>
+            <a href="/admin/flaggedPlayers">View flagged players</a>
+        </div>
+        <div>
+            <a href="/admin/flaggedSets">View flagged sets</a>
+        </div>
+        <div>
+            <a href="/admin/createPlayer">Create new player</a>
+        </div>
+        <div>
+            <a href="/download/excel">Download Elo ratings as Excel spreadsheet (note: this will
+                take about 30 seconds)</a>
+        </div>
+        <br />
+        @if (admin)
+        {
+            <div>
+                <a href="#" id="resetAllEloScores">Reset all players' ELO</a></div>
+            <div>
+                <a href="#" id="processAllTournaments">Process all tournaments ELO in chronological
+                    order</a>
+            </div>
+            <div>
+                <a href="#" id="resetCharacterCache">Reset character stats cache</a>
+            </div>
+            <div>
+                <a href="/admin/uploadimage">Upload Images</a>
+            </div>
+            <div>
+                <a href="/admin/logs">View logs</a>
+            </div>
+            
+        }
+        <br />
+        Elo processing last run at: @ViewBag.LastProcessedDate
+        <br />
+        Number of tournaments added since then: @ViewBag.NumberProcessedTournaments
+        <br />
+        <a href="#" id="toggleProcessedFiles">Show processed files</a>
+        <table id="uploaded-files" class="adminTable">
+            <tr>
+                <th>
+                    Uploaded by
+                </th>
+                <th>
+                    Upload filename
+                </th>
+                <th>
+                    Upload date
+                </th>
+                <th>
+                    Processed
+                </th>
+                @if (admin)
+                {
+                    <th>
+                        Erase from history
+                    </th>
+                }
+                <th>
+                    Download XML
+                </th>
+            </tr>
+            @foreach (SSBPD.Controllers.AdminController.TournamentFileDummy file in ViewBag.Files)
+            {
+                string processedClass = file.Processed ? "processed hidden" : "unprocessed";
+                <tr class="@processedClass">
+                    <td>@file.User.username
+                    </td>
+                    <td>@file.OriginalFileName
+                    </td>
+                    <td>@file.Inserted
+                    </td>
+                    @if (file.Processed)
+                    {
+                        <td>
+                            Processed
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a id="@file.TournamentFileId" class="process-file" href="#">Process</a><span class="loading hidden"><img
+                                src="/Image/loading.gif" /></span>
+                        </td>
+                    }
+                    @if (admin)
+                    {
+                        <td>
+                            <a id="@file.TournamentFileId" class="erase-file" href="#">Erase</a><span class="loading hidden"><img
+                                src="/Image/loading.gif" /></span>
+                        </td>
+                    }
+                    <td>
+                        <form action="/download/@file.TournamentGUID">
+                        <select name="cultureCode">
+                            @foreach (var ci in ViewBag.Cultures)
+                            {
+                                <option value="@ci.IetfLanguageTag">@ci.DisplayName</option>
+                            }
+                        </select>
+                        <input type="submit" value="Download" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <a href="#" id="toggleProcessedTournaments">Hide processed tournaments</a>
+        <table id="tournaments" class="adminTable">
+            <tr>
+                <th>
+                    Tournament Date
+                </th>
+                <th>
+                    Tournament Name
+                </th>
+                <th>
+                    Elo Processed
+                </th>
+                @if (admin)
+                {
+                    <th>
+                        Erase
+                    </th>
+                }
+            </tr>
+            @foreach (SSBPD.Models.Tournament tournament in ViewBag.Tournaments)
+            {
+                string eloProcessedClass = tournament.eloProcessed ? "elo-processed" : "elo-unprocessed";
+                <tr class="@eloProcessedClass">
+                    <td>@tournament.Date.ToString("MM/dd/yyyy")
+                    </td>
+                    <td>
+                        <a href="/tournament/@tournament.TournamentID">@tournament.Name</a>
+                    </td>
+                    @if (tournament.eloProcessed)
+                    {
+                        <td>
+                            Elo processed
+                        </td>
+                    }
+                    else if (tournament.locked)
+                    {
+                        <td>
+                            Locked
+                            @if (admin)
+                            {
+                                @:(<a href="#" tournamentId ="@tournament.TournamentID" class="unlock-tournament">unlock</a>)
+                                                                                                                }
+                        </td>   
+                    }
+                    else if (tournament.Date > DateTime.Now.AddDays(-7))
+                    {
+                        <td>
+                            <a id="@tournament.TournamentID" class="process-tournament" href="#">Process</a><span
+                                class="loading hidden"><img src="/Image/loading.gif" /></span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Unprocessed
+                        </td>
+                    }
+                    @if (admin)
+                    {
+                        <td>
+                            <a id="@tournament.TournamentID" class="erase-tournament" href="#">Erase</a><span
+                                class="loading hidden"><img src="/Image/loading.gif" /></span>
+                        </td>
+                    }
+                </tr>
+        
+            }
+        </table>
+        @if (admin)
+        {
+            <table id="users" class="adminTable">
+                <tr>
+                    <th>
+                        Username
+                    </th>
+                    <th>
+                        Is admin
+                    </th>
+                    <th>
+                        Is mod
+                    </th>
+                </tr>
+                @foreach (SSBPD.Models.User user in ViewBag.Users)
+                {
+                    string isAdmin = user.isAdmin ? "Admin" : "Not admin";
+                    string changeAdminLink = "/admin/changeAdminStatus/" + user.UserID + "?newStatus=";
+                    changeAdminLink += user.isAdmin ? "false" : "true";
+                    string mod = user.isModerator ? "Mod" : "Not mod";
+                    string changeModLink = "/admin/changeModStatus/" + user.UserID + "?newStatus=";
+                    changeModLink += user.isModerator ? "false" : "true";
+                    <tr>
+                        <td>@user.username
+                        </td>
+                        <td>@isAdmin (<a href="@changeAdminLink">change</a>)
+                        </td>
+                        <td>@mod (<a href="@changeModLink">change</a>)
+                        </td>
+                    </tr>
+         
+                }
+            </table>
+        }
+    </div>
+}

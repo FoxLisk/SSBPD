@@ -1,0 +1,38 @@
+﻿@model SSBPD.ViewModels.SetDetailViewModel
+@using SSBPD.Models
+@{
+    Layout = null;
+}
+<div>
+    @Model.winner.Tag as @Model.set.WinnerCharacter.DisplayString() @Html.Raw(Model.set.WinnerCharacter.ImgTag())
+    >
+    @Model.loser.Tag as @Model.set.LoserCharacter.DisplayString() @Html.Raw(Model.set.LoserCharacter.ImgTag())
+    <br />
+    at <a href="/tournament/@Model.tournament.URL">@Model.tournament.Name</a>
+</div>
+@if (Model.videos.Count() > 0)
+{
+    <br />
+    <div>
+        Videos:
+        <ul>
+            @foreach (SetLink link in Model.videos)
+            {
+                <li><a href="@link.URL" class="link">@link.Title</a>
+                    @if (Convert.ToBoolean(Session["userModerator"]))
+                    {
+                    <input type="text" setlinkid="@link.SetLinkID" class="rename-setlink" /> <a href="#" setlinkid="@link.SetLinkID" class="rename-setlink">Rename</a>
+                     <a href="#" setlinkid="@link.SetLinkID" class="delete-setlink"><img src="/Image/delete.png" /></a>
+                    }
+                    else if (Convert.ToInt32(Session["userId"]) > 0)
+                    { 
+                        <span>(<a href="#" class="report-link">report</a>)</span>
+                        <span class="report hidden">(Are you sure?
+                            <a href="#" setLinkId="@link.SetLinkID" class="flag-link">yes</a>)
+                        </span>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+}

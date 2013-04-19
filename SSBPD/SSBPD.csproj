@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E8505F1D-DA79-45DE-9BC7-9F6404BA25A0}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SSBPD</RootNamespace>
+    <AssemblyName>SSBPD</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <PublishDatabases>false</PublishDatabases>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ExcelLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SqlServerCompact.4.0.8852.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.SqlServerCompact.4.1.8482.2\lib\System.Data.SqlServerCe.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\System.Web.Providers.Core.1.0\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Administration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.WebPages.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.0.0.0\lib\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\EntityFramework.SqlServerCompact.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\CustomRegionController.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\FlagController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SetController.cs" />
+    <Compile Include="Controllers\SetLinkController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
+    <Compile Include="Controllers\TournamentController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\SSBPDContext.cs" />
+    <Compile Include="Helper\BinaryTree.cs" />
+    <Compile Include="Helper\Bracket.cs" />
+    <Compile Include="Helper\EloCalculator.cs" />
+    <Compile Include="Helper\IRatingsCalculator.cs" />
+    <Compile Include="Migrations\201203060135302_addRegionFlags.cs" />
+    <Compile Include="Migrations\201203060135302_addRegionFlags.Designer.cs">
+      <DependentUpon>201203060135302_addRegionFlags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203102230416_addDraws.cs" />
+    <Compile Include="Migrations\201203102230416_addDraws.Designer.cs">
+      <DependentUpon>201203102230416_addDraws.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203102238358_removeBestOf.cs" />
+    <Compile Include="Migrations\201203102238358_removeBestOf.Designer.cs">
+      <DependentUpon>201203102238358_removeBestOf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203110150495_removeVirtualSetsFromTournament.cs" />
+    <Compile Include="Migrations\201203110150495_removeVirtualSetsFromTournament.Designer.cs">
+      <DependentUpon>201203110150495_removeVirtualSetsFromTournament.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203172154269_addTournamentIdToEloScores.cs" />
+    <Compile Include="Migrations\201203172154269_addTournamentIdToEloScores.Designer.cs">
+      <DependentUpon>201203172154269_addTournamentIdToEloScores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203172312020_AddCharacters.cs" />
+    <Compile Include="Migrations\201203172312020_AddCharacters.Designer.cs">
+      <DependentUpon>201203172312020_AddCharacters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203311755173_addCharacterFlags.cs" />
+    <Compile Include="Migrations\201203311755173_addCharacterFlags.Designer.cs">
+      <DependentUpon>201203311755173_addCharacterFlags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201204050047568_addUserIdToTournamentFiles.cs" />
+    <Compile Include="Migrations\201204050047568_addUserIdToTournamentFiles.Designer.cs">
+      <DependentUpon>201204050047568_addUserIdToTournamentFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201204072054491_addUserGuids.cs" />
+    <Compile Include="Migrations\201204072054491_addUserGuids.Designer.cs">
+      <DependentUpon>201204072054491_addUserGuids.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201204072211560_addCustomRegions.cs" />
+    <Compile Include="Migrations\201204072211560_addCustomRegions.Designer.cs">
+      <DependentUpon>201204072211560_addCustomRegions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201204221555040_removeAuthorizedUploaders.cs" />
+    <Compile Include="Migrations\201204221555040_removeAuthorizedUploaders.Designer.cs">
+      <DependentUpon>201204221555040_removeAuthorizedUploaders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201204280241327_gettingVideoLinksInPlace.cs" />
+    <Compile Include="Migrations\201204280241327_gettingVideoLinksInPlace.Designer.cs">
+      <DependentUpon>201204280241327_gettingVideoLinksInPlace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201204281925033_addingLinkFlags.cs" />
+    <Compile Include="Migrations\201204281925033_addingLinkFlags.Designer.cs">
+      <DependentUpon>201204281925033_addingLinkFlags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201206042141581_removeFirstAndLastName.cs" />
+    <Compile Include="Migrations\201206042141581_removeFirstAndLastName.Designer.cs">
+      <DependentUpon>201206042141581_removeFirstAndLastName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201206050220211_tournamentGuidToRealGuid.cs" />
+    <Compile Include="Migrations\201206050220211_tournamentGuidToRealGuid.Designer.cs">
+      <DependentUpon>201206050220211_tournamentGuidToRealGuid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201206060122515_addLogMessageTable.cs" />
+    <Compile Include="Migrations\201206060122515_addLogMessageTable.Designer.cs">
+      <DependentUpon>201206060122515_addLogMessageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207142315079_addLogs.cs" />
+    <Compile Include="Migrations\201207142315079_addLogs.Designer.cs">
+      <DependentUpon>201207142315079_addLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\CharacterFlag.cs" />
+    <Compile Include="Models\CustomRegion.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\LogMessage.cs" />
+    <Compile Include="Models\RegionFlag.cs" />
+    <Compile Include="Models\SetLink.cs" />
+    <Compile Include="Models\SetLinkFlag.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\BracketViewModel.cs" />
+    <Compile Include="ViewModels\CharacterDetailViewModel.cs" />
+    <Compile Include="ViewModels\CustomRegionsViewModel.cs" />
+    <Compile Include="ViewModels\FlaggedPlayersViewModel.cs" />
+    <Compile Include="ViewModels\FlaggedSetsViewModel.cs" />
+    <Compile Include="ViewModels\PlayerDetailViewModel.cs" />
+    <Compile Include="ViewModels\RegionGroupViewModel.cs" />
+    <Compile Include="ViewModels\RegionIndexViewModel.cs" />
+    <Compile Include="ViewModels\SetDetailViewModel.cs" />
+    <Compile Include="ViewModels\TournamentDetailViewModel.cs" />
+    <Compile Include="ViewModels\TournamentIndexViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\VersusRegionSetsViewModel.cs" />
+    <Compile Include="ViewModels\VersusRegionViewModel.cs" />
+    <None Include="Files\AuthorizedUploads\_" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\ExcelLibrary.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\NuGet.Core.dll" />
+    <Content Include="bin\SSBPD.dll" />
+    <Content Include="bin\SSBPD.pdb" />
+    <Content Include="bin\System.Web.Abstractions.dll" />
+    <Content Include="bin\System.Web.ApplicationServices.dll" />
+    <Content Include="bin\System.Web.dll" />
+    <Content Include="bin\System.Web.DynamicData.dll" />
+    <Content Include="bin\System.Web.Entity.dll" />
+    <Content Include="bin\System.Web.Extensions.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Providers.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Routing.dll" />
+    <Content Include="bin\System.Web.Services.dll" />
+    <Content Include="bin\System.Web.WebPages.Administration.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebActivator.dll" />
+    <Content Include="bin\WebActivator.pdb" />
+    <Content Include="bin\WebMatrix.Data.dll" />
+    <Content Include="bin\WebMatrix.WebData.dll" />
+    <Content Include="Content\Character.css" />
+    <Content Include="Content\jquery.fancybox-1.3.4.css" />
+    <Content Include="Content\Player.css" />
+    <Content Include="Content\Region.css" />
+    <Compile Include="Files\AuthorizedUploads\WebForm1.aspx.cs">
+      <DependentUpon>_</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\AuthorizedUploads\WebForm1.aspx.designer.cs">
+      <DependentUpon>_</DependentUpon>
+    </Compile>
+    <Compile Include="Files\UnauthorizedUploads\WebForm1.aspx.cs">
+      <DependentUpon>_</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\UnauthorizedUploads\WebForm1.aspx.designer.cs">
+      <DependentUpon>_</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ELOProcessor.cs" />
+    <Compile Include="Helper\EraserHelper.cs" />
+    <Compile Include="Helper\Levenshtein.cs" />
+    <Compile Include="Helper\Match.cs" />
+    <Compile Include="Helper\TioParser.cs" />
+    <Compile Include="Helper\URLHelper.cs" />
+    <Compile Include="Helper\UserAuthHelper.cs" />
+    <Compile Include="Migrations\201202240018414_InitialCreate.cs" />
+    <Compile Include="Migrations\201202240018414_InitialCreate.Designer.cs">
+      <DependentUpon>201202240018414_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201202280116599_addModerator.cs" />
+    <Compile Include="Migrations\201202280116599_addModerator.Designer.cs">
+      <DependentUpon>201202280116599_addModerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201202290049163_addImages.cs" />
+    <Compile Include="Migrations\201202290049163_addImages.Designer.cs">
+      <DependentUpon>201202290049163_addImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201202290100451_addImages1.cs" />
+    <Compile Include="Migrations\201202290100451_addImages1.Designer.cs">
+      <DependentUpon>201202290100451_addImages1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201202290114481_addFlags.cs" />
+    <Compile Include="Migrations\201202290114481_addFlags.Designer.cs">
+      <DependentUpon>201202290114481_addFlags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203032143172_addEloTable.cs" />
+    <Compile Include="Migrations\201203032143172_addEloTable.Designer.cs">
+      <DependentUpon>201203032143172_addEloTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201203041815424_addRegions.cs" />
+    <Compile Include="Migrations\201203041815424_addRegions.Designer.cs">
+      <DependentUpon>201203041815424_addRegions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\EloScore.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerFlag.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Set.cs" />
+    <Compile Include="Models\Tournament.cs" />
+    <Compile Include="Models\TournamentFile.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
+    <Content Include="bin\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
+    <Content Include="bin\amd64\sqlceca40.dll" />
+    <Content Include="bin\amd64\sqlcecompact40.dll" />
+    <Content Include="bin\amd64\sqlceme40.dll" />
+    <Content Include="bin\amd64\sqlceqp40.dll" />
+    <Content Include="bin\amd64\sqlcese40.dll" />
+    <Content Include="bin\System.Data.SqlServerCe.dll" />
+    <Content Include="bin\System.Data.SqlServerCe.Entity.dll" />
+    <Content Include="bin\x86\Microsoft.VC90.CRT\msvcr90.dll" />
+    <Content Include="bin\x86\Microsoft.VC90.CRT\README_ENU.txt" />
+    <Content Include="bin\x86\sqlceca40.dll" />
+    <Content Include="bin\x86\sqlcecompact40.dll" />
+    <Content Include="bin\x86\sqlceme40.dll" />
+    <Content Include="bin\x86\sqlceqp40.dll" />
+    <Content Include="bin\x86\sqlcese40.dll" />
+    <Content Include="Content\Admin.css" />
+    <Content Include="Content\Home.css" />
+    <Content Include="Content\Search.css" />
+    <Content Include="Content\Tournament.css" />
+    <Content Include="Content\Upload.css" />
+    <Content Include="Files\aib.xml" />
+    <Content Include="Files\Logs\log.txt" />
+    <Content Include="Files\test.xml" />
+    <None Include="Files\UnauthorizedUploads\_" />
+    <Content Include="Global.asax" />
+    <Content Include="Image\edit.png" />
+    <Content Include="Image\Flags\at.png" />
+    <Content Include="Image\Flags\au.png" />
+    <Content Include="Image\Flags\be.png" />
+    <Content Include="Image\Flags\br.png" />
+    <Content Include="Image\Flags\bs.png" />
+    <Content Include="Image\Flags\ca.png" />
+    <Content Include="Image\Flags\ch.png" />
+    <Content Include="Image\Flags\cl.png" />
+    <Content Include="Image\Flags\co.png" />
+    <Content Include="Image\Flags\de.png" />
+    <Content Include="Image\Flags\dk.png" />
+    <Content Include="Image\Flags\ec.png" />
+    <Content Include="Image\Flags\es.png" />
+    <Content Include="Image\Flags\fi.png" />
+    <Content Include="Image\Flags\fr.png" />
+    <Content Include="Image\Flags\lu.png" />
+    <Content Include="Image\Flags\uk.png" />
+    <Content Include="Image\Flags\il.png" />
+    <Content Include="Image\Flags\it.png" />
+    <Content Include="Image\Flags\jp.png" />
+    <Content Include="Image\Flags\mx.png" />
+    <Content Include="Image\Flags\nl.png" />
+    <Content Include="Image\Flags\no.png" />
+    <Content Include="Image\Flags\qu.png" />
+    <Content Include="Image\Flags\se.png" />
+    <Content Include="Image\Flags\us.png" />
+    <Content Include="Image\Flags\ve.png" />
+    <Content Include="Image\Icons\Bowser.png" />
+    <Content Include="Image\Icons\CaptainFalcon.png" />
+    <Content Include="Image\Icons\DonkeyKong.png" />
+    <Content Include="Image\Icons\DrMario.png" />
+    <Content Include="Image\Icons\Falco.png" />
+    <Content Include="Image\Icons\Fox.png" />
+    <Content Include="Image\Icons\Ganondorf.png" />
+    <Content Include="Image\Icons\IceClimbers.png" />
+    <Content Include="Image\Icons\Jigglypuff.png" />
+    <Content Include="Image\Icons\Kirby.png" />
+    <Content Include="Image\Icons\Link.png" />
+    <Content Include="Image\Icons\Luigi.png" />
+    <Content Include="Image\Icons\Mario.png" />
+    <Content Include="Image\Icons\Marth.png" />
+    <Content Include="Image\Icons\Mewtwo.png" />
+    <Content Include="Image\Icons\MrGameAndWatch.png" />
+    <Content Include="Image\Icons\Ness.png" />
+    <Content Include="Image\Icons\Peach.png" />
+    <Content Include="Image\Icons\Pichu.png" />
+    <Content Include="Image\Icons\Pikachu.png" />
+    <Content Include="Image\Icons\NoCharacter.png" />
+    <Content Include="Image\Icons\Roy.png" />
+    <Content Include="Image\Icons\Samus.png" />
+    <Content Include="Image\Icons\Sheik.png" />
+    <Content Include="Image\Icons\Yoshi.png" />
+    <Content Include="Image\Icons\YoungLink.png" />
+    <Content Include="Image\Icons\Zelda.png" />
+    <Content Include="Image\favicon.ico" />
+    <Content Include="Image\loading.gif" />
+    <Content Include="Image\plus.png" />
+    <Content Include="Image\delete.png" />
+    <Content Include="Scripts\Admin.js" />
+    <Content Include="Scripts\Character.js" />
+    <Content Include="Scripts\FancyboxUtils.js" />
+    <Content Include="Scripts\jQuery\jquery.fancybox-1.3.4.js" />
+    <Content Include="Scripts\ga.js" />
+    <Content Include="Scripts\highcharts\highcharts.js" />
+    <Content Include="Scripts\jQuery\jquery-1.7.min.js" />
+    <Content Include="Scripts\jQuery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jQuery\jquery.validate.js" />
+    <Content Include="Scripts\jQuery\jquery.validate.min.js" />
+    <Content Include="Scripts\jQuery\jquery-1.7.js" />
+    <Content Include="Scripts\Search.js" />
+    <Content Include="Scripts\User.js" />
+    <Content Include="Scripts\Player-Admin.js" />
+    <Content Include="Scripts\Player-Highcharts.js" />
+    <Content Include="Scripts\Player.js" />
+    <Content Include="Scripts\Region.js" />
+    <Content Include="Scripts\Tournament.js" />
+    <Content Include="Scripts\Upload.js" />
+    <Content Include="Scripts\Site.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Admin\MergePlayers.cshtml" />
+    <Content Include="Views\Admin\UploadImages.cshtml" />
+    <Content Include="Views\Admin\FlaggedPlayers.cshtml" />
+    <Content Include="Views\Admin\AssignSets.cshtml" />
+    <Content Include="Views\Admin\CreatePlayer.cshtml" />
+    <Content Include="Views\Admin\getTournamentSelectForPlayer.cshtml" />
+    <Content Include="Views\Region\Versus.cshtml" />
+    <Content Include="Views\Region\VersusSets.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\Region\RegionGroup.cshtml" />
+    <Content Include="Views\Character\Stats.cshtml" />
+    <Content Include="Views\Character\Index.cshtml" />
+    <Content Include="Views\Character\Detail.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Files\passwordnouns.txt" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\Upload\LoggedInIndex.cshtml" />
+    <Content Include="Views\Upload\SeedForm.cshtml" />
+    <Content Include="Views\Set\Detail.cshtml" />
+    <Content Include="Views\User\CustomRegions.cshtml" />
+    <Content Include="Views\Tournament\ViewBracket.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Set\Error.cshtml" />
+    <Content Include="Views\Set\Moderator.cshtml" />
+    <Content Include="Views\Set\AddVideoForm.cshtml" />
+    <Content Include="Views\Set\Info.cshtml" />
+    <Content Include="Views\Admin\FlaggedSets.cshtml" />
+    <Content Include="Views\Set\FlagPlayersForm.cshtml" />
+    <Content Include="Views\Search\PlayerIndex.cshtml" />
+    <Content Include="Views\Search\PlayerSearch.cshtml" />
+    <Content Include="Views\Search\SetIndex.cshtml" />
+    <Content Include="Views\Search\SetSearch.cshtml" />
+    <Content Include="Views\Shared\Date.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Player\Videos.cshtml" />
+    <Content Include="Views\SetLink\LeaderBoard.cshtml" />
+    <Content Include="Views\Admin\ViewLogs.cshtml" />
+    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
+    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
+    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\README_ENU.txt" />
+    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\msvcr90.dll" />
+    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\fancybox\" />
+    <Folder Include="_bin_deployableAssemblies\EN\" />
+    <Folder Include="_bin_deployableAssemblies\System.Data.SqlServerCe.Entity\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Player\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Player\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <None Include="bin\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Tournament\Index.cshtml" />
+    <Content Include="Views\Tournament\Detail.cshtml" />
+    <Content Include="Views\Player\Versus.cshtml" />
+    <Content Include="Views\Player\SearchFoundMultiple.cshtml" />
+    <Content Include="Views\Upload\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Login\LogIn.cshtml" />
+    <Content Include="Views\Login\LogOut.cshtml" />
+    <Content Include="Views\Login\CreateAccount.cshtml" />
+    <Content Include="Views\ViewPage1.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Shared\Exception.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Error\InternalException.cshtml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54834</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51370/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:51371</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "CreatePlayer";
+}
+
+<h2>Create Player</h2>
+<div class="error">@ViewBag.Message</div>
+<form id="createPlayer" method="post" action="/admin/createplayer">
+    <label for="tag">New tag:</label>
+    <input name="tag" type="text" />
+    <input type="submit" value="Create player" />
+</form>

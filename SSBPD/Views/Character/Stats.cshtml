@@ -1,0 +1,28 @@
+﻿@model List<SSBPD.Controllers.CharacterStats>
+@using SSBPD.Models
+@{
+    ViewBag.Title = "Character statistics";
+}
+<p>
+These stats were last run at @ViewBag.LastProcessed. They are not guaranteed to be up to date with the information we have,
+and they should not be seen as anything other than an interesting way of looking at the data.
+</p>
+@foreach (var charStats in Model.OrderByDescending(c => (c.totalRatio - c.expectedWinRatio)))
+{
+    if (charStats.character == Character.NoCharacter || (charStats.totalWins + charStats.totalDraws + charStats.totalLosses) == 0) { continue; }
+    int characterId = (int)charStats.character;
+    <p>@charStats.character.DisplayString() | @charStats.totalWins - @charStats.totalDraws - @charStats.totalLosses 
+    (@String.Format("{0:##;;0}%", charStats.totalRatio) actual, @String.Format("{0:##}%", charStats.expectedWinRatio) expected) <a href="#" characterid="@characterId" class="showStats">show stats</a></p>
+    <ol class="hidden" characterid="@characterId">
+        @foreach (var record in charStats.stats)
+        {
+            if (record.Key == charStats.character || (record.Value.wins + record.Value.draws + record.Value.losses) == 0)
+            {
+                continue;
+            }
+            <li>
+                @record.Key.DisplayString() | @record.Value.wins - @record.Value.draws - @record.Value.losses (@String.Format("{0:##;;0}%", record.Value.ratio)  actual, @String.Format("{0:##}%", charStats.opponentToExpectedScore[record.Key]) expected)
+            </li> 
+        }
+    </ol>
+}

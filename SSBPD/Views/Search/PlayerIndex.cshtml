@@ -1,0 +1,59 @@
+﻿@using SSBPD.Models;
+@{
+    ViewBag.Title = "Player Search";
+}
+<div>
+    Leave any fields blank to have them ignored in your search.
+    <form action="/search/player" method="post">
+    <input type="submit" value="Search" />
+    <br />
+    <label for="minrating">
+        Minimum rating:</label><input type="text" name="minrating" />
+    <label for="maxrating">
+        Maximum rating:</label><input type="text" name="maxrating" />
+    <br />
+    Characters:
+    <br />
+    <input type="checkbox" class="checkAllCharacters" />select all
+    <ul class="characterList">
+        @{
+            var characters = CharacterUtils.Characters;
+            while (characters.Count() > 0)
+            {
+            <li>
+                @foreach (var character in characters.Take(4))
+                {
+                    int val = (int)character;
+                    <input type="checkbox" name="characters" value="@val" />
+                    @Html.Raw(character.ImgTag())
+                }
+            </li>
+                characters = characters.Skip(4);
+            }
+        }
+    </ul>
+    <br />
+    Regions:
+    <br />
+    <input type="checkbox" class="checkAllRegions" />select all
+    <ul class="regionList">
+        @{
+            var regions = RegionUtils.Regions;
+            while (regions.Count() > 0)
+            {
+            <li>
+                @foreach (var region in regions.Take(4))
+                {
+                    int val = (int)region;
+                
+                    <span class="region"><input type="checkbox" name="regions" value="@val" />@Html.Raw(region.ImgTag()) @region.DisplayString()</span>
+                
+                }
+            </li>
+                regions = regions.Skip(4);
+            }
+        }
+    </ul>
+    <input type="submit" value="Search" />
+    </form>
+</div>

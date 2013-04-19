@@ -1,0 +1,26 @@
+﻿#playerContainer 
+{
+    clear: both;
+}
+
+#allPlayers
+{
+    width:50%;
+    float:left;
+}
+
+#regions 
+{
+    width:50%;
+    float:left;
+}
+
+span.smallspacer
+{
+    padding: 0 10px 0 10px;
+}
+
+a.set-detail
+{
+    text-decoration:none;
+}

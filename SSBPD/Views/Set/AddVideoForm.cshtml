@@ -1,0 +1,11 @@
+﻿@model SSBPD.ViewModels.SetDetailViewModel
+@{
+    Layout = null;
+}
+
+<div>Add a link:</div>
+<form>
+<label for="url">Link:</label> <input type="text" name="url"/>
+<label for="title">Short description:</label> <input type="text" name="title" />
+<a class="addVideo" setID="@Model.set.SetID" href="#">Add video</a>
+</form>

@@ -1,0 +1,24 @@
+﻿#winnerOptions
+{
+    float: left;
+}
+#loserOptions
+{
+    float: right;
+}
+a.set-detail
+{
+    text-decoration: none;
+}
+
+span.region
+{
+    display: inline-block;
+    width: 180px;
+}
+
+ul
+{
+    list-style-type: none;
+    padding-left: 0px;
+}
